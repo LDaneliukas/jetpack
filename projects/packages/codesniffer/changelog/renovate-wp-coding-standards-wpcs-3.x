@@ -1,4 +1,4 @@
-Significance: patch
+Significance: minor
 Type: changed
 
-Updated package dependencies.
+Update to WordPress-CodeSniffer 3.0.
