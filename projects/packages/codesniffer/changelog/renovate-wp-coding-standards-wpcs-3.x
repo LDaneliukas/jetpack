@@ -1,4 +1,4 @@
-Significance: minor
+Significance: major
 Type: changed
 
-Update to WordPress-CodeSniffer 3.0.
+Update to WordPress-Coding-Standards 3.0.
