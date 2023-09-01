@@ -693,7 +693,6 @@ class Jetpack_Recipes {
 
 		return $style;
 	}
-
 }
 
 new Jetpack_Recipes();

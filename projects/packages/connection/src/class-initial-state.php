@@ -71,5 +71,4 @@ class Initial_State {
 			wp_add_inline_script( $handle, static::render(), 'before' );
 		}
 	}
-
 }

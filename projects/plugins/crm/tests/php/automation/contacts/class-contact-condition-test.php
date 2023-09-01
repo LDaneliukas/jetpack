@@ -147,5 +147,4 @@ class Contact_Condition_Test extends JPCRM_Base_Test_Case {
 		$contact_transitional_status_condition->execute( $contact_data, $previous_contact );
 		$this->assertFalse( $contact_transitional_status_condition->condition_met() );
 	}
-
 }

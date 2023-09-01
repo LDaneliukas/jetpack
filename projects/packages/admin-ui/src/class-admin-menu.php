@@ -198,5 +198,4 @@ class Admin_Menu {
 		$url = $fallback ? $fallback : admin_url();
 		return $url;
 	}
-
 }

@@ -3338,5 +3338,4 @@ final class ZeroBSCRM {
 			$this->modules->activate_module_and_redirect();
 		}
 	}
-
 }
