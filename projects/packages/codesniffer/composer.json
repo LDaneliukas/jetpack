@@ -50,10 +50,6 @@
 			"options": {
 				"monorepo": true
 			}
-		},
-		{
-			"type": "vcs",
-			"url": "https://github.com/Automattic/WordPress-Coding-Standards"
 		}
 	],
 	"minimum-stability": "dev",
