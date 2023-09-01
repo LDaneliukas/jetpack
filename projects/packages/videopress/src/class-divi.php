@@ -71,4 +71,3 @@ class Divi {
 		$this->vidi_extension = new \VideoPress_Divi_Extension();
 	}
 }
-
