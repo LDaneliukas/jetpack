@@ -58,7 +58,7 @@
             "dist": {
                 "type": "path",
                 "url": "projects/packages/codesniffer",
-                "reference": "55a4ac22f8477c908c2f4322b03b0b75f4071425"
+                "reference": "6f8579737780e88d3cdbedf7523388294476a34e"
             },
             "require": {
                 "automattic/vipwpcs": "^2.3",
@@ -70,7 +70,6 @@
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "@dev",
-                "wp-coding-standards/wpcs": "2023-01-04 as 2.3.1",
                 "yoast/phpunit-polyfills": "1.1.0"
             },
             "type": "phpcodesniffer-standard",
