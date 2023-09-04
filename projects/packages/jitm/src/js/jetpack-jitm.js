@@ -72,6 +72,7 @@ jQuery( document ).ready( function ( $ ) {
 				html +=
 					'<a href="#" data-module="' +
 					envelope.activate_module +
+					'" data-redirect="' + envelope.redirect_to_settings +
 					'" type="button" class="jitm-button is-compact is-primary jptracks" data-jptracks-name="nudge_click" data-jptracks-prop="jitm-' +
 					envelope.id +
 					'-activate_module">' +
@@ -189,7 +190,7 @@ jQuery( document ).ready( function ( $ ) {
 				return false;
 			}
 
-			// Make request to activate module.
+			// Make request to activate module. Redirect to module settings page if successful.
 			$.ajax( {
 				url:
 					window.jitm_config.api_root +
@@ -207,6 +208,12 @@ jQuery( document ).ready( function ( $ ) {
 			} ).done( function () {
 				$( '#jitm-banner__activate a' ).text( window.jitm_config.activated_module_text );
 				$( '#jitm-banner__activate a' ).attr( 'disabled', true );
+
+				// Redirect to module settings page if a redirect is set.
+				if ( $activate_button.data( 'redirect' ) ) {
+					console.log( "Redirecting to " + $activate_button.data( 'redirect' ) );
+					window.location.href = $activate_button.data( 'redirect' );
+				}
 
 				// Hide the JITM after 2 seconds.
 				setTimeout( function () {
