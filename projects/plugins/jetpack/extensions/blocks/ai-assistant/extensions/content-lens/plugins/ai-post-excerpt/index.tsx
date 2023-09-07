@@ -108,6 +108,8 @@ function AiPostExcerpt() {
 		// Reset suggestion state
 		reset();
 
+		await autosave( ev );
+
 		const messageContext: ContentLensMessageContextProps = {
 			type: 'ai-content-lens',
 			contentType: 'post-excerpt',
@@ -151,6 +153,18 @@ ${ postContent }
 				disabled={ isTextAreaDisabled }
 			/>
 
+			{ isQuotaExceeded && <UpgradePrompt /> }
+
+			{ error?.code && error.code !== 'error_quota_exceeded' && (
+				<Notice
+					status={ error.severity }
+					isDismissible={ false }
+					className="jetpack-ai-assistant__error"
+				>
+					{ error.message }
+				</Notice>
+			) }
+
 			<ExternalLink
 				href={ __(
 					'https://wordpress.org/documentation/article/page-post-settings-sidebar/#excerpt',
@@ -161,18 +175,6 @@ ${ postContent }
 			</ExternalLink>
 
 			<div className="jetpack-generated-excerpt__ai-container">
-				{ error?.code && error.code !== 'error_quota_exceeded' && (
-					<Notice
-						status={ error.severity }
-						isDismissible={ false }
-						className="jetpack-ai-assistant__error"
-					>
-						{ error.message }
-					</Notice>
-				) }
-
-				{ isQuotaExceeded && <UpgradePrompt /> }
-
 				<AiExcerptControl
 					words={ excerptWordsNumber }
 					onWordsNumberChange={ wordsNumber => {
