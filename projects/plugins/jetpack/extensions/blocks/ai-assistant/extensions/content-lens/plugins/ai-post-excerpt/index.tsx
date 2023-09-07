@@ -163,8 +163,6 @@ ${ postContent }
 			</ExternalLink>
 
 			<div className="jetpack-generated-excerpt__ai-container">
-				{ isQuotaExceeded && <UpgradePrompt /> }
-
 				{ error?.code && error.code !== 'error_quota_exceeded' && (
 					<Notice
 						status={ error.severity }
@@ -174,6 +172,8 @@ ${ postContent }
 						{ error.message }
 					</Notice>
 				) }
+
+				{ isQuotaExceeded && <UpgradePrompt /> }
 
 				<AiExcerptControl
 					words={ excerptWordsNumber }
