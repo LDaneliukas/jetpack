@@ -28,6 +28,7 @@ type ContentLensMessageContextProps = {
 	content?: string;
 	language?: string;
 	tone?: string;
+	model?: string;
 };
 
 function AiPostExcerpt() {
@@ -49,6 +50,7 @@ function AiPostExcerpt() {
 	const [ additionalRequest, setAdditionalRequest ] = useState( '' );
 	const [ language, setLanguage ] = useState();
 	const [ tone, setTone ] = useState();
+	const [ model, setModel ] = useState( 'gpt-3.5-turbo-16k' );
 
 	// Remove core excerpt panel
 	const { removeEditorPanel } = useDispatch( 'core/edit-post' );
@@ -131,7 +133,7 @@ ${ postContent }
 			},
 		];
 
-		request( prompt, { feature: 'jetpack-ai-content-lens' } );
+		request( prompt, { feature: 'jetpack-ai-content-lens', model } );
 	}
 
 	function setExpert() {
@@ -195,12 +197,17 @@ ${ postContent }
 						setTone( newTone );
 						setReenable( true );
 					} }
-					disabled={ isBusy || isQuotaExceeded }
+					model={ model }
+					onModelChange={ newModel => {
+						setModel( newModel );
+						setReenable( true );
+					} }
 					additionalRequest={ additionalRequest }
 					onAdditionalRequestChange={ addRequest => {
 						setAdditionalRequest( addRequest );
 						setReenable( true );
 					} }
+					disabled={ isBusy || isQuotaExceeded }
 				/>
 
 				<div className="jetpack-generated-excerpt__generate-buttons-container">

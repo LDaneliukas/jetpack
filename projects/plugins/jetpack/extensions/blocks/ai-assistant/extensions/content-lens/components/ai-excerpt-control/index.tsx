@@ -2,7 +2,14 @@
  * External dependencies
  */
 import { aiAssistantIcon } from '@automattic/jetpack-ai-client';
-import { RangeControl, Button, BaseControl, TextareaControl } from '@wordpress/components';
+import {
+	RangeControl,
+	Button,
+	BaseControl,
+	TextareaControl,
+	__experimentalToggleGroupControl as ToggleGroupControl, // eslint-disable-line wpcalypso/no-unsafe-wp-apis
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption, // eslint-disable-line wpcalypso/no-unsafe-wp-apis
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 /**
@@ -58,6 +65,9 @@ export function AiExcerptControl( {
 	tone,
 	onToneChange,
 
+	model,
+	onModelChange,
+
 	additionalRequest,
 	onAdditionalRequestChange,
 }: AiExcerptControlProps ) {
@@ -86,6 +96,44 @@ export function AiExcerptControl( {
 					isSmall
 				/>
 			</BaseControl>
+
+			{ isSettingActive && (
+				<>
+					<BaseControl>
+						<I18nMenuDropdown
+							disabled={ disabled }
+							onChange={ onLanguageChange }
+							value={ language }
+							label={ langLabel }
+						/>
+
+						<ToneDropdownMenu label={ toneLabel } value={ tone } onChange={ onToneChange } />
+					</BaseControl>
+
+					<TextareaControl
+						__nextHasNoMarginBottom
+						label={ __( 'Additional request', 'jetpack' ) }
+						onChange={ onAdditionalRequestChange }
+						value={ additionalRequest }
+						disabled={ disabled }
+					/>
+
+					<ToggleGroupControl
+						__nextHasNoMarginBottom
+						isBlock
+						label={ __( 'Model', 'jetpack' ) }
+						onChange={ onModelChange }
+						value={ model }
+					>
+						<ToggleGroupControlOption
+							label={ __( 'GTP-3.5 Turbo', 'jetpack' ) }
+							value="gpt-3.5-turbo-16k"
+						/>
+						<ToggleGroupControlOption label={ __( 'GPT-4', 'jetpack' ) } value="gpt-4" />
+					</ToggleGroupControl>
+				</>
+			) }
+
 			<RangeControl
 				value={ words }
 				onChange={ onWordsNumberChange }
@@ -98,27 +146,6 @@ export function AiExcerptControl( {
 				showTooltip={ false }
 				disabled={ disabled }
 			/>
-
-			{ isSettingActive && (
-				<>
-					<I18nMenuDropdown
-						disabled={ disabled }
-						onChange={ onLanguageChange }
-						value={ language }
-						label={ langLabel }
-					/>
-
-					<ToneDropdownMenu label={ toneLabel } value={ tone } onChange={ onToneChange } />
-
-					<TextareaControl
-						__nextHasNoMarginBottom
-						label={ __( 'Additional request', 'jetpack' ) }
-						onChange={ onAdditionalRequestChange }
-						value={ additionalRequest }
-						disabled={ disabled }
-					/>
-				</>
-			) }
 		</div>
 	);
 }
