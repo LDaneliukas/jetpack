@@ -68,7 +68,7 @@ export function AiExcerptControl( {
 	}
 
 	const lang = language?.split( ' ' )[ 0 ];
-	const langLabel = LANGUAGE_MAP[ lang ]?.label;
+	const langLabel = LANGUAGE_MAP[ lang ]?.label || __( 'Language', 'jetpack' );
 
 	const toneLabel = PROMPT_TONES_MAP[ tone ]?.label;
 
