@@ -27,8 +27,11 @@ type ContentLensMessageContextProps = {
 	type: 'ai-content-lens';
 	contentType: 'post-excerpt';
 	postId: number;
-	content?: string;
 	words?: number;
+	request?: string;
+	content?: string;
+	language?: string;
+	tone?: string;
 };
 
 function AiPostExcerpt() {
@@ -46,8 +49,10 @@ function AiPostExcerpt() {
 	// Post excerpt words number
 	const [ excerptWordsNumber, setExcerptWordsNumber ] = useState( 50 );
 
-	// Re enable the AI Excerpt component
 	const [ reenable, setReenable ] = useState( false );
+	const [ additionalRequest, setAdditionalRequest ] = useState( '' );
+	const [ language, setLanguage ] = useState();
+	const [ tone, setTone ] = useState();
 
 	// Remove core excerpt panel
 	const { removeEditorPanel } = useDispatch( 'core/edit-post' );
@@ -115,6 +120,9 @@ function AiPostExcerpt() {
 			contentType: 'post-excerpt',
 			postId,
 			words: excerptWordsNumber,
+			request: additionalRequest,
+			language,
+			tone,
 			content: `Post content:
 ${ postContent }
 `,
@@ -181,7 +189,22 @@ ${ postContent }
 						setExcerptWordsNumber( wordsNumber );
 						setReenable( true );
 					} }
+					language={ language }
+					onLanguageChange={ newLang => {
+						setLanguage( newLang );
+						setReenable( true );
+					} }
+					tone={ tone }
+					onToneChange={ newTone => {
+						setTone( newTone );
+						setReenable( true );
+					} }
 					disabled={ isBusy || isQuotaExceeded }
+					additionalRequest={ additionalRequest }
+					onAdditionalRequestChange={ addRequest => {
+						setAdditionalRequest( addRequest );
+						setReenable( true );
+					} }
 				/>
 
 				<div className="jetpack-generated-excerpt__generate-buttons-container">
