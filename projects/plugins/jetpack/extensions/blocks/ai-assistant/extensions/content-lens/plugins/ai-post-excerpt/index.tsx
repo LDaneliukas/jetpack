@@ -103,7 +103,6 @@ function AiPostExcerpt() {
 	async function requestExcerpt( ev: React.MouseEvent ): Promise< void > {
 		await autosave( ev );
 
-		// Enable Generate button
 		setReenable( false );
 
 		// Reset suggestion state
