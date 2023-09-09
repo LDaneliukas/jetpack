@@ -25,6 +25,11 @@ export type AskQuestionOptionsArgProps = {
 	feature?: 'ai-assistant-experimental' | string | undefined;
 
 	/*
+	 * Allows to use a specific AI assistant model. Default value is undefined.
+	 */
+	model?: string;
+
+	/*
 	 * Allows the use of function calling. Default value is undefined.
 	 */
 	functions?: Array< {
@@ -57,12 +62,18 @@ const debug = debugFactory( 'jetpack-ai-client:ask-question' );
  */
 export default async function askQuestion(
 	question: PromptProp,
-	{ postId = null, fromCache = false, feature, functions }: AskQuestionOptionsArgProps = {}
+	{ postId = null, fromCache = false, feature, functions, model }: AskQuestionOptionsArgProps = {}
 ): Promise< SuggestionsEventSource > {
-	debug( 'Asking question: %o. options: %o', question, { postId, fromCache, feature, functions } );
+	debug( 'Asking question: %o. options: %o', question, {
+		postId,
+		fromCache,
+		feature,
+		functions,
+		model,
+	} );
 
 	return new SuggestionsEventSource( {
 		question,
-		options: { postId, feature, fromCache, functions },
+		options: { postId, feature, fromCache, functions, model },
 	} );
 }
