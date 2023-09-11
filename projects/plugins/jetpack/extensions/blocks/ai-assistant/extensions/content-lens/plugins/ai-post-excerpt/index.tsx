@@ -19,6 +19,7 @@ import { AiExcerptControl } from '../../components/ai-excerpt-control';
 /**
  * Types and constants
  */
+type AiAvailableModels = 'gpt-3.5-turbo-16k' | 'gpt-4';
 type ContentLensMessageContextProps = {
 	type: 'ai-content-lens';
 	contentType: 'post-excerpt';
@@ -28,7 +29,7 @@ type ContentLensMessageContextProps = {
 	content?: string;
 	language?: string;
 	tone?: string;
-	model?: string;
+	model?: AiAvailableModels;
 };
 
 function AiPostExcerpt() {
@@ -50,7 +51,7 @@ function AiPostExcerpt() {
 	const [ additionalRequest, setAdditionalRequest ] = useState( '' );
 	const [ language, setLanguage ] = useState();
 	const [ tone, setTone ] = useState();
-	const [ model, setModel ] = useState( 'gpt-3.5-turbo-16k' );
+	const [ model, setModel ] = useState< AiAvailableModels >( 'gpt-4' );
 
 	// Remove core excerpt panel
 	const { removeEditorPanel } = useDispatch( 'core/edit-post' );
@@ -121,6 +122,7 @@ function AiPostExcerpt() {
 			request: additionalRequest,
 			language,
 			tone,
+			model,
 			content: `Post content:
 ${ postContent }
 `,
